@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+{% block title %}Home {% endblock %}
+
+{% block body %} 
+    <h2>usuarios</h2>
+        <p class="text-primary">{{info}}</p>
+        <p class="text-danger">{{error}}</p>
+        <table id="table_id" class="display">
+            <thead>
+                <tr>
+                    <th>email</th>
+                    <th> user</th>
+                    <th> nombre</th>
+                    <th> apellido</th>
+                    <th> legajo</th>
+                    <th> direccion</th>
+                    <th> telefono</th>
+                    
+                    {% if user.findPermiso('all')  %}
+                        <th> editar</th>
+                        <th> eliminar</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+            {% for us in colUsers %}
+                <tr>
+                    <td> {{us.__GET('email')}} </td>
+                    <td> {{us.__GET('username')}} </td>
+                    <td> {{us.__GET('firstname')}} </td>
+                    <td> {{us.__GET('lastname')}} </td>
+                    <td> {{us.__GET('legajo')}} </td>
+                    <td>  {{us.__GET('direction')}}</td>
+                    <td> {{us.__GET('phone')}} </td>
+               
+                   {% if user.findPermiso('all')  %}
+                        <td> 
+                            <form action="?action=editUserId" method="POST"><input type="hidden" name="id" value="{{us.__GET('id')}}"><input   class="btn btn-light" type="submit" value="editar"></form>
+                        </td>
+                        <td> 
+                        {% if us.isActivo %}
+                            <form action="?action=disableUser" method="POST" ><input type="hidden" name="id" value="{{us.__GET('id')}}"><input  class="btn btn-light" type="submit" value="eliminar"></form>
+                        {% else %}
+                            <form action="?action=enableUser" method="POST"><input type="hidden" name="id" value="{{us.__GET('id')}}"><input   class="btn btn-light" type="submit" value="Activar"></form>                  
+                        {% endif %}
+                        </td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+{% endblock %}

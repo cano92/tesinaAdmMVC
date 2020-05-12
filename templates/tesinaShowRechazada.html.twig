@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tesina edit {% endblock %}
+
+
+{% block body %} 
+
+        <p class="text-primary">{{info}}</p>
+        <p class="text-danger">{{error}}</p>
+    
+    <div class="form-group">
+            <h6 class="text-danger" >Tesina Rechazada por favor revise las correcciones</h6>
+            <div class="alert alert-danger" role="alert"> {{tesis.comentario}} </div>
+        </div>
+
+          <!-- Button trigger modal -->
+        <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModalScrollable">
+            ver Form1
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalScrollableTitle">Formulario 1</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <h6>Director</h6>
+                    <div class="p-3 mb-2 bg-light text-dark" role="alert"> {{ director['lastname'] }} {{ director['firstname'] }} </div>
+                </div>
+                <div class="form-group">
+                    <h6>codirector</h6>
+                    <div class="p-3 mb-2 bg-light text-dark" role="alert"> {{ codirector['lastname'] }} {{ director['firstname'] }} </div>
+                </div>
+                <div class="form-group">
+                    <h6>asesor profesional</h6>
+                    <div class="p-3 mb-2 bg-light text-dark" role="alert"> {{form1.asesor_profesional}} </div>
+                </div>
+                <div class="form-group">
+                    <h6>alumno 1</h6>
+                    <div class="p-3 mb-2 bg-light text-dark" role="alert"> {{ alumno1.username }} </div>
+                </div>
+                <div class="form-group">
+                    <h6>alumno 2</h6>
+                    <div class="p-3 mb-2 bg-light text-dark" role="alert"> {{ alumno2.username }} </div>
+                </div>
+                <div class="form-group">
+                    <h6>clasificacion</h6>
+                    <div class="p-3 mb-2 bg-light text-dark" role="alert"> {{form1.clasificacion}} </div>
+                </div>
+                <div class="form-group">
+                    <h6>plazo de ejecucion</h6>
+                    <div class="p-3 mb-2 bg-light text-dark" role="alert"> {{form1.plazo_de_ejecucion}} </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+    
+    <h3>Tesina</h3>
+    
+    <form action="?action=updateTesina" method="post">
+        <input type="hidden" name="tesisId" value="{{tesis.id}}">
+
+        <div class="form-group">
+            <label for="formGroupExampleInput">Titulo</label>
+            <input type="text" required name="titulo" value="{{tesis.titulo}}" class="form-control" id="formGroupExampleInput" placeholder="titulo tesina">
+        </div>
+        <div class="form-group">
+            <label for="formGroupExampleInput">objetivo</label>
+            <input type="text" required name="objetivo" value="{{tesis.objetivo}}" class="form-control" id="formGroupExampleInput" placeholder="objetivo">
+        </div>
+        <div class="form-group">
+            <label for="formGroupExampleInput">motivacion</label>
+            <input type="text" required name="motivacion" value="{{tesis.motivacion}}" class="form-control" id="formGroupExampleInput" placeholder="motivacion">
+        </div>
+        <div class="form-group">
+            <label for="formGroupExampleInput2">desarrollo propuestos</label>
+            <input type="text" required name="desarrolloPropuestos" value="{{tesis.desarrollos_propuestos}}" class="form-control" id="formGroupExampleInput2" placeholder="desarrollo propuestos">
+        </div>
+        <div class="form-group">
+            <label for="formGroupExampleInput2">resultados esperados</label>
+            <input type="text" required name="resultadosEsperados" value="{{tesis.resultados_esperados}}" class="form-control" id="formGroupExampleInput2" placeholder="resultadosEsperados">
+        </div>
+        
+        <div class="form-group"></div>
+        <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
+
+{% endblock %}

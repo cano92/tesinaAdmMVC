@@ -1,0 +1,163 @@
+{% if user is empty %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="./?">Home</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <ul class="navbar-nav mr-auto">
+            
+            <li class="nav-item ">
+                <a class="nav-item nav-link" href="./?action=buscador" >Buscador</a>
+            </li>
+        </ul>
+           
+        <a class="navbar-brand" href="./?action=registerForm">registrarse</a> 
+</nav>
+
+{% else %}
+    <!-- si el usuario es administrador la inf se organiza de otra forma porque el menu es mas largo -->
+    {% if  user.findRol('administrador') %}
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="./?action=home">Home</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <ul class="navbar-nav mr-auto">
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Tesinas
+                                {% if user.__GET('tesinaAlerts') >= 1  %}
+                                <i class="fa fa-envelope-o">
+                                        <span class="badge badge-warning">{{ user.__GET('tesinaAlerts') }}</span>
+                                </i>
+                                {% endif %}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="./?action=newTesina">Nueva Tesina </a>
+                            <a class="dropdown-item" href="./?action=myTesinas">Mis Tesinas
+                                {% if user.__GET('tesinaAlerts') >= 1  %}
+                                <i class="fa fa-envelope-o">
+                                    <span class="badge badge-warning">{{ user.__GET('tesinaAlerts') }}</span>
+                                </i>
+                                {% endif %}
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="./?action=inicialTesinas">Propuestas Tesinas</a>
+                            <a class="dropdown-item" href="./?action=tesinasEnCurso">Tesinas en Curso</a>
+                            <a class="dropdown-item" href="./?action=tesinasFinalizadas">Tesinas Finalizadas</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="./?action=allTesinas">Todas</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Usuarios
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="./?action=allAlumnos"> Alumnos </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="./?action=allUsers">Todos</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Reportes
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="./?action=reportesEstado"> Reportes Estado </a>
+                            <a class="dropdown-item" href="./?action=reportesNotas">Reportes por Nota</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="./?action=buscadorLog" >Buscador</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="./?action=info"> Info </a>
+                    </li>
+
+                </ul>
+                <form class="form-inline" action="./?action=editUserId" method="POST">
+                    <input type="hidden" name="id" value="{{user.__GET('id')}}">
+                    <input   class="btn btn-sm btn-outline-secondary" type="submit" value="{{user.__GET('username') }}">
+                </form>    
+                <a  class="navbar-brand" href="./?action=logout"> salir</a>
+            </div>
+        </nav>
+
+<!-- si es alumno o personal administrativo -->
+    {% else %} 
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="./?action=home">Home</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                
+                <ul class="navbar-nav mr-auto">
+                
+                    {% if user.findRol('alumno') %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="./?action=newTesina">Nueva Tesina</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./?action=myTesinas">
+                            Mis Tesinas 
+                            {% if user.__GET('tesinaAlerts') >= 1  %}
+                                <i class="fa fa-envelope-o">
+                                        <span class="badge badge-warning">{{ user.__GET('tesinaAlerts') }}</span>
+                                </i>
+                            {% endif%}
+                        </a>
+                    </li>
+                    {% endif %}
+                    {% if user.findRol('personal administrativo') %}
+                    <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Tesinas
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">                                
+                                <a class="dropdown-item" href="./?action=inicialTesinas">Propuestas Tesinas</a>
+                                <a class="dropdown-item" href="./?action=tesinasEnCurso">Tesinas en Curso</a>
+                                <a class="dropdown-item" href="./?action=tesinasFinalizadas">Tesinas Finalizadas</a>
+                            </div>
+                        </li>
+                    <li class="nav-item dropdown">                
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Reportes
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="./?action=reportesEstado"> Reportes Estado </a>
+                            <a class="dropdown-item" href="./?action=reportesNotas">Reportes por Nota</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="./?action=allAlumnos">Alumnos</a>
+                    </li>
+                    {% endif %}
+                    <li class="nav-item ">
+                        <a class="nav-link" href="./?action=buscadorLog" >Buscador</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="./?action=info"> Info </a>
+                    </li>
+                </ul>
+
+                <form class="form-inline" action="./?action=editUserId" method="POST">
+                    <input type="hidden" name="id" value="{{user.__GET('id')}}">
+                    <input   class="btn btn-sm btn-outline-secondary" type="submit" value="{{user.__GET('username') }}">
+                </form>
+                
+                <a  class="navbar-brand" href="./?action=logout"> salir</a>
+            </div>
+        </nav>
+    {% endif %}
+{% endif %}

@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tesina Form {% endblock %}
+
+
+{% block body %} 
+
+        <p class="text-primary">{{info}}</p>
+        <p class="text-danger">{{error}}</p>
+   
+    
+    <div class="row justify-content-md-center">
+    <div class="col-sm-10">
+    
+        <h3>Formulario 1</h3>
+        <div class="form-group">
+            <h5>director</h5>
+            <div class="p-3 mb-2 bg-light text-dark" role="alert"> {{form1.director}} </div>
+        </div>
+        
+        <div class="form-group">
+            <h5>codirector</h5>
+            <div class="p-3 mb-2 bg-light text-dark" role="alert"> {{form1.codirector}} </div>
+            
+        </div>
+        <div class="form-group">
+            <h5>asesor profesional</h5>
+            <div class="p-3 mb-2 bg-light text-dark" role="alert"> {{form1.asesor_profesional}} </div>
+        </div>
+        <div class="form-group">
+            <h5>clasificacion</h5>
+            <div class="p-3 mb-2 bg-light text-dark" role="alert"> {{form1.clasificacion}} </div>
+        </div>
+        <div class="form-group">
+            <h5>plazo de ejecucion</h5>
+            <div class="p-3 mb-2 bg-light text-dark" role="alert"> {{form1.plazo_de_ejecucion}} </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}

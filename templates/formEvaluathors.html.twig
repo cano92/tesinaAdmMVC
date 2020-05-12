@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tesina Form {% endblock %}
+
+
+{% block body %} 
+<h4>Evaluadores</h4>
+
+    <p class="text-primary">{{info}}</p>
+    <p class="text-danger">{{error}}</p>
+
+
+    <form action="?action=registerEvaluathors" method="post">
+        
+        <div class="form-group">
+            <label for="formGroupExampleInput">evaluador 1<span style="color:red">*</span></label>
+           <select name="evaluador1" class="custom-select" >
+                <option></option>
+                {% for evaluador in colEvaluadores  %}
+                    <option value="{{ evaluador['id'] }}" {% if evaluador['id'] == idEv1 %}selected {% endif %} >
+                        {{ evaluador['lastname'] }} {{evaluador['firstname']}}
+                    </option>
+                {% endfor %}
+            </select> 
+        </div>
+
+        <div class="form-group">
+            <label for="formGroupExampleInput">evaluador 2<span style="color:red">*</span></label>
+           <select name="evaluador2" class="custom-select"  >
+                <option></option>
+                {% for evaluador in colEvaluadores  %}
+                    <option value="{{ evaluador['id'] }}" {% if evaluador['id'] == idEv2 %}selected {% endif %} >
+                        {{ evaluador['lastname'] }} {{evaluador['firstname']}}
+                    </option>
+                {% endfor %}
+            </select> 
+        </div>
+
+        <div class="form-group">
+            <label for="formGroupExampleInput">evaluador 3<span style="color:red">*</span></label>
+           <select name="evaluador3" class="custom-select" >
+                <option></option>
+                {% for evaluador in colEvaluadores  %}
+                    <option value="{{ evaluador['id'] }}" {% if evaluador['id'] == idEv3 %}selected {% endif %} >
+                        {{ evaluador['lastname'] }} {{evaluador['firstname']}}
+                    </option>
+                {% endfor %}
+            </select> 
+        </div>
+
+        <div class="form-group">
+            <label for="formGroupExampleInput">evaluador 4<span style="color:red">*</span></label>
+           <select name="evaluador4" class="custom-select" >
+                <option></option>
+                {% for evaluador in colEvaluadores  %}
+                    <option value="{{ evaluador['id'] }}" {% if evaluador['id'] == idEv4 %}selected {% endif %} >
+                        {{ evaluador['lastname'] }} {{evaluador['firstname']}}
+                    </option>
+                {% endfor %}
+            </select> 
+        </div>
+
+        <input   class="btn btn-light" type="submit" value="enviar">
+    </form> 
+
+{% endblock %}

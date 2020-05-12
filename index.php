@@ -1,0 +1,249 @@
+<?php
+ini_set('display_startup_errors',1);
+ini_set('display_errors',1);
+error_reporting(-1);
+
+require_once('vendor/autoload.php');
+
+require_once('entity/PDORepository.php');
+require_once('entity/User.php');
+require_once('entity/CurlRequest.php');
+require_once('entity/Formulario1.php');
+require_once('entity/UserValidateInput.php');
+require_once('entity/TesinaValidateInput.php');
+require_once('entity/Formulario1ValidateInput.php');
+require_once('entity/FormEvaluathorsValidateInput.php');
+require_once('entity/FormValidateGeneral.php');
+require_once('entity/TesinaEstadosHC.php');
+require_once('entity/TesinaNotasHC.php');
+
+require_once('model/UserRepository.php');
+require_once('model/TesisRepository.php');
+require_once('model/RolRepository.php');
+require_once('model/UsuarioTieneRolRepository.php');
+
+
+require_once('controller/UserController.php');
+require_once('controller/InitController.php');
+require_once('controller/TesinaController.php');
+
+require_once('view/TwigView.php');
+require_once('view/UserView.php');
+require_once('view/InitView.php');
+require_once('view/TesinaView.php');
+
+if(!isset($_SESSION)) { session_start(); }
+
+
+if(isset($_GET["action"]) ){
+    switch($_GET["action"]){
+        case'registerForm':
+            InitController::getInstance()->registerForm();
+            break;
+        case'showError':
+            InitController::getInstance()->showError();
+            break;
+        case'stop':
+            InitController::getInstance()->stop();
+            break;
+        case'login':
+            UserController::getInstance()->login();
+            break;
+        case'register':
+            InitController::getInstance()->registerUser();
+            break;
+        case'homeStop':
+            TesinaController::getInstance()->homeStop();
+            break;
+        case'logout':
+            UserController::getInstance()->logout();
+            break;
+        case'home':
+            TesinaController::getInstance()->home();
+            break;
+        case'allUsers':
+            UserController::getInstance()->allUsers();
+            break;
+        case'allAlumnos':
+            UserController::getInstance()->allAlumnos();
+            break;
+        case'updateUser':
+            UserController::getInstance()->updateUser();
+            break;
+        case'editFormUser':
+            UserController::getInstance()->editFormUser();
+            break;
+        case'enableUserAlumno':
+            UserController::getInstance()->enableUserAlumno();
+            break;
+        case'desableUserAlumno':
+            UserController::getInstance()->desableUserAlumno();
+            break;
+        case'newTesina':
+            TesinaController::getInstance()->newTesina();
+            break;
+        case'registerTesina':
+            TesinaController::getInstance()->registerTesina();
+            break;
+        case'success':
+            InitController::getInstance()->showInfo();
+            break;
+        case'FormEditUser':
+            InitController::getInstance()->FormEditUser();
+            break;
+        case'inputUserRegisterInvalid':
+            InitController::getInstance()->inputUserRegisterInvalid();
+            break;
+        case'editUserId':
+            UserController::getInstance()->editUserId();
+            break;
+        case'editFormUserError':
+            UserController::getInstance()->editFormUserError();
+            break;
+        case'editFormUserErrorInput':
+            UserController::getInstance()->editFormUserErrorInput();
+            break;
+        case'successEdit':
+            UserController::getInstance()->successEdit();
+            break;
+        case'disableUser':
+            UserController::getInstance()->disableUser();
+            break;
+        case'enableUser':
+            UserController::getInstance()->enableUser();
+            break;
+        case'successEnableUser':
+            UserController::getInstance()->successEnableUser();
+            break;
+        case'successDisableUser':
+            UserController::getInstance()->successDisableUser();
+            break;
+        case'successDisableAlumno':
+            UserController::getInstance()->successDisableAlumno();
+            break;
+        case'successEnableAlumno':
+            UserController::getInstance()->successEnableAlumno();
+            break;
+        case'info':
+            UserController::getInstance()->info();
+            break;
+        case'allTesinas':
+            TesinaController::getInstance()->allTesinas();
+            break;
+        case'tesinasFinalizadas':
+            TesinaController::getInstance()->tesinasFinalizadas();
+            break;
+        case'inicialTesinas':
+            TesinaController::getInstance()->inicialTesinas();
+            break;
+        case'registerForm1':
+            TesinaController::getInstance()->registerForm1();
+            break;
+        case'editForm1':
+            TesinaController::getInstance()->editForm1();
+            break;
+        case'verTesina':
+            TesinaController::getInstance()->verTesina();
+            break;
+        case'updateTesina':
+            TesinaController::getInstance()->updateTesina();
+            break;
+        case'showTesinaRevision':
+            TesinaController::getInstance()->showTesinaRevision();
+            break;
+        case'aceptTesis':
+            TesinaController::getInstance()->aceptTesis();
+            break;
+        case'denyTesis':
+            TesinaController::getInstance()->denyTesis();
+            break;    
+        case'showTesinasCorregida':
+            TesinaController::getInstance()->showTesinasCorregida();
+            break;
+        case'showForm1Edit':
+            TesinaController::getInstance()->showForm1Edit();
+            break;
+        case'regsiterEditForm1':
+            TesinaController::getInstance()->regsiterEditForm1();
+            break;
+        case'succesForm1Edit':
+            TesinaController::getInstance()->succesForm1Edit();
+            break;
+        case'form1InputError':
+            TesinaController::getInstance()->form1InputError();
+            break;
+        case'form1EditInputError':
+            TesinaController::getInstance()->form1EditInputError();
+            break;
+        case'tesinaEnCursoVue':
+            TesinaController::getInstance()->tesinaEnCursoVue();
+            break;  
+        case'myTesinas':
+            TesinaController::getInstance()->myTesinas();
+            break;
+        case'tesinaRechazadaEdit':
+            TesinaController::getInstance()->tesinaRechazadaEdit();
+            break;
+        case'newTesinaSuccess':
+            TesinaController::getInstance()->newTesinaSuccess();
+            break;
+        case'showFormEvaluathors':
+            TesinaController::getInstance()->showFormEvaluathors();
+            break;
+        case'registerEvaluathors':
+            TesinaController::getInstance()->registerEvaluathors();
+            break;
+        case'successRegisterEvaluathors':
+            TesinaController::getInstance()->successRegisterEvaluathors();
+            break;
+        case'tesinasEnCurso':
+            TesinaController::getInstance()->tesinasEnCurso();
+            break;
+        case'showTesinaInfAvance':
+            TesinaController::getInstance()->showTesinaInfAvance();
+            break;
+        case'showTesinaFechExp':
+            TesinaController::getInstance()->showTesinaFechExp();
+            break;
+        case'registerFechExp':
+            TesinaController::getInstance()->registerFechExp();
+            break;
+        case'registerInfAvance':
+            TesinaController::getInstance()->registerInfAvance();
+            break;
+        case'showTesinaUpdateNote':
+            TesinaController::getInstance()->showTesinaUpdateNote();
+            break;
+        case'registerNote':
+            TesinaController::getInstance()->registerNote();
+            break;
+        case'cancelTesina':
+            TesinaController::getInstance()->cancelTesina();
+            break;
+        case'showFormEvaluathorsError':
+            TesinaController::getInstance()->showFormEvaluathorsError();
+            break;
+        case'buscador':
+            InitController::getInstance()->buscador();
+            break;
+        case'buscadorLog':
+            UserController::getInstance()->buscadorLog();
+            break;
+        case'reportesEstado':
+            TesinaController::getInstance()->reportesEstado();
+            break;
+        case'reportesNotas':
+            TesinaController::getInstance()->reportesNotas();
+            break;
+        case'reportesDirectores':
+            TesinaController::getInstance()->reportesDirectores();
+            break;
+        case'confirmTesinaCancel':
+            TesinaController::getInstance()->confirmTesinaCancel();
+            break;
+
+    }
+}  
+else{
+    InitController::getInstance()->home();
+}

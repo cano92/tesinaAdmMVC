@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}mis tesinas {% endblock %}
+
+
+{% block body %} 
+    <h2>Mis Teinas</h2> 
+        <p class="text-primary">{{info}}</p>
+        <p class="text-danger">{{error}}</p>
+        <table id="table_id" class="display">
+            <thead>
+                <tr>
+                    <th>titulo Tesina</th>
+                    <th> fecha creacion</th>
+                    <th>estado</th>
+                    <th>revision</th>
+                    <th> fecha exposicion</th>
+                    <th> nota</th>
+                    <th> opcion</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+            {% for tesis in colTesis %}
+                <tr {% if tesis.leido == true %} class="bg-warning" {% endif %} >
+                    <td  > {{tesis.titulo}} </td>
+                    <td> {{tesis.fecha}} </td>
+                    <td  > {{tesis.estado}} </td>
+                     <td> 
+                        {% if  tesis.revision == 'rechazada' %}  
+                            <p class="text-danger" >
+                        {% endif %}   
+                        {% if  tesis.revision == 'aceptada' %}  
+                            <p class="text-primary" >
+                        {% else %} 
+                            <p>
+                        {% endif %}
+                        {{tesis.revision}} 
+                        </p>
+                    </td>
+                    
+                    <td> 
+                        {% if tesis.fecha_exposicion != '0000-00-00' %}
+                            {{tesis.fecha_exposicion}}
+                        {% endif %}
+                    </td>
+                    <td> 
+                        {% if tesis.nota != '0' %}
+                            {{tesis.nota}}
+                        {% endif %}
+                    </td>
+
+                     {% if tesis.revision == 'rechazada'  %}
+                        <td> 
+                            <form action="./?action=tesinaRechazadaEdit" method="POST">
+                                <input type="hidden" name="idTesis" value="{{tesis.id}}">
+                                <input  class="btn btn-light" type="submit" value="editarTesina">
+                            </form>
+                        </td>
+                    {% else %}
+                        <td> 
+                            <form action="./?action=verTesina" method="POST">
+                                <input type="hidden" name="idTesis" value="{{tesis.id}}">
+                                <input  class="btn btn-light" type="submit" value="verTesina">
+                            </form>
+                        </td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+{% endblock %}

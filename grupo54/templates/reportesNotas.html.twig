@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reportes Estado {% endblock %}
+
+
+{% block body %} 
+<div class="row">
+    <h4>Reportes Notas</h4>
+</div>
+
+<div class="row justify-content-center">
+
+    <div class="col-sm-12" id="graphicHCNotas" >
+    
+    </div>
+</div>
+
+
+<script type='text/javascript'>
+
+Highcharts.chart('graphicHCNotas', {
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+    },
+    title: {
+        text: 'Reporte Notas'
+    },
+    tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: false
+            },
+            showInLegend: true
+        }
+    },
+    series: [{
+        name: 'Brands',
+        colorByPoint: true,
+        data: [{
+            name: 'nota1',
+            y: {{result.nota1}}
+        }, {
+            name: 'nota2',
+            y: {{result.nota2}}
+        }, {
+            name: 'nota3',
+            y: {{result.nota3}}
+        }, {
+            name: 'nota4',
+            y: {{result.nota4}}
+        }, {
+            name: 'nota5',
+            y: {{result.nota5}}
+        }, {
+            name: 'nota6',
+            y: {{result.nota6}}
+        }, {
+            name: 'nota7',
+            y: {{result.nota7}}
+        }, {
+            name: 'nota8',
+            y: {{result.nota8}}
+        }, {
+            name: 'nota9',
+            y: {{result.nota9}}
+        }, {
+            name: 'nota10',
+            y: {{result.nota10}}
+        }
+        ]
+    }]
+});
+
+
+</script>
+
+
+
+{% endblock %}

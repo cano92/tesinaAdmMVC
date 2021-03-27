@@ -32,3 +32,4 @@ Descripcion de Roles y Persmisos
 > * usuario_show	
 
 Los usuarios Admin pueden pueden agregar mas roles y mas permisos y asignar roles a nuevos usuarios
+

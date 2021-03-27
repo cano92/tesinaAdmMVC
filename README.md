@@ -5,5 +5,6 @@ usuario
 Diagrama UML
 ![Screenshot](tesinaAdmMVC-UML.png)
 
-ejemplo de Roles y Persmisos
-los usuarios administrador pueden agregar mas roles y mas permisos y asignar roles a otros usuarios
+Descripcion de Roles y Persmisos.
+
+Los usuarios Admin pueden pueden agregar mas roles y mas permisos y asignar roles a otros usuarios

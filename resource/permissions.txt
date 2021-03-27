@@ -1,1 +1,32 @@
 
+***********
+usuarios
+	username/pass		rol
+	admin	 		administrador
+	padmin			personalAdministrativo
+	alumno			alumno
+
+*************************
+Rol				permisos
+
+administrador 			**all
+				
+
+personal administrativo 	tesina_validate (tesinas que en estado pendiente para hacetar o rechazar)
+				usuario_accept(alumnos en espera de ser habilitados  darle rol de alumno. permiso tesina_new incluido)
+				tesina_finish (tesinas publicas finalizadas)
+				tesina_show
+				usuario_update				
+				usuario_show
+				
+
+alumno				tesina_new
+				tesina_update (puede ser en todo momento?? o solo despues de la validacion, se le da el permiso)
+				tesina_finish (tesinas publicas finalizadas)
+				tesinas_Show
+				usuario_update
+				usuario_show				
+
+invitado			tesina_finish (tesinas publicas finalizadas)
+				usuario_update
+				usuario_show	

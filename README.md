@@ -27,7 +27,7 @@ Descripcion de Roles y Persmisos.
 > * usuario_update
 > * usuario_show				
 
-##### invitado	
+##### invitado
 > usuario_update
 > usuario_show	
 

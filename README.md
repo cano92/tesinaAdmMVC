@@ -5,7 +5,7 @@ usuario
 Diagrama UML
 ![Screenshot](tesinaAdmMVC-UML.png)
 
-Descripcion de Roles y Persmisos.
+Descripcion de Roles y Persmisos
 
 
 ##### administrador 
@@ -28,7 +28,7 @@ Descripcion de Roles y Persmisos.
 > * usuario_show				
 
 ##### invitado
-> usuario_update
-> usuario_show	
+> * usuario_update
+> * usuario_show	
 
-Los usuarios Admin pueden pueden agregar mas roles y mas permisos y asignar roles a otros usuarios
+Los usuarios Admin pueden pueden agregar mas roles y mas permisos y asignar roles a nuevos usuarios

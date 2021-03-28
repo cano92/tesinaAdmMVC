@@ -6,6 +6,7 @@ TesinaAdmMVC lleva el seguimiento de usuarios con rol de **Alumnos** para poder 
 
 cada alumno debera presentar el **formulario1** y esperar que sea aceptado o rechazado por el **personal administrativo** para poder iniciar el proceso y seguimiento de la tesis con los datos presentados y todos los participantes del mismo indicado por el formulario1
 
+
 Diagrama UML
 ![Screenshot](tesinaAdmMVC-UML.png)
 
